@@ -22,7 +22,7 @@ Source Configuration
 - name: ufo
   type: dynatrace-ufo-resource
   source:
-    UFO_IP: {{ufo-ip}}
+    UFO_IP: 192.0.2.1
 ```
 
 Behavior
