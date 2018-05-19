@@ -1,7 +1,7 @@
 Dynatrace UFO resource for Concourse
 ====================================
 
-Allows setting status LEDs on [Dynatrace UFO](https://github.com/Dynatrace/ufo-esp32) via Concourse
+Allows setting status LEDs on [Dynatrace UFO](https://github.com/Dynatrace/ufo-esp32) via Concourse  
 Used within the [PivotalDevOpsPipeline demo](https://github.com/akirasoft/PivotalDevOpsTutorial)
 
 Resource Type Configuration
