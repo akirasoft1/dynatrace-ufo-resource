@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+cd "${1}"
+
+exec 3>&1 # make stdout available as fd 3 for the result
+exec 1>&2 # redirect all output to stderr for logging
+
+PATH=/usr/local/bin:$PATH
+
+PAYLOAD=$(mktemp /tmp/resource-in.XXXXXX)
+
+cat > "$PAYLOAD" <&0
+
+# do stuff
+UFO_IP="$(jq -r '.source.UFO_IP' < "${PAYLOAD}")"
+UFO_ROW="$(jq -r '.params.UFO_ROW' < "${PAYLOAD}")"
+UFO_COLOR="$(jq -r '.params.UFO_COLOR' < "${PAYLOAD}")"
+
+echo "setting UFO at $UFO_IP $UFO_ROW ring to $UFO_COLOR"
+
+curl "http://$UFO_IP/api?$UFO_ROW=0|15|$UFO_COLOR"
+
+timestamp="$(jq -n "{version:{timestamp:\"$(date +%s)\"}}")"
+echo "$timestamp $metadata $debug_info " | jq -s add  >&3
